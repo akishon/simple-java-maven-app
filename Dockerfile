@@ -1,4 +1,4 @@
-FROM maven:3.9-eclipse-temurin-17 AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 ARG APP_VERSION=1.0.0
 COPY . .
 RUN mvn package -Dproject.version=${APP_VERSION}
