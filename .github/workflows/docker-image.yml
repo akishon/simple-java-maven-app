@@ -49,7 +49,7 @@ jobs:
           script:
             docker stop my-app || true
             docker rm my-app || true
-            docker run -d --pull=always ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_HUB_USERNAME }}:1.0.${{ github.run_number }}
+            docker run -d --pull=always ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.DOCKER_IMAGE_NAME }}:1.0.${{ github.run_number }}
             
 
 
