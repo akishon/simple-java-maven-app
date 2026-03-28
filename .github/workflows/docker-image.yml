@@ -1,0 +1,36 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  DOCKER_IMAGE_NAME: simple-java-maven-app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Login to Docker hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+    
+    - name: Build the Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          ${{ secrets.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          ${{ secrets.DOCKER_HUB_USER }}/${{ env.DOCKER_IMAGE_NAME }}:${{ github.run_number }}
+        build-args: |
+          APP_VERSION=1.0.${{ github.run_number }}
