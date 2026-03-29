@@ -1,10 +1,10 @@
 name: Deploy maven on ec2 with self hosted
 
 on:
-  #push:
-  #  branches: [ "AWS-infrastructure" ]
-  #pull_request:
-  #  branches: [ "AWS-infrastructure" ]
+  push:
+    branches: [ "AWS-infrastructure" ]
+  pull_request:
+    branches: [ "AWS-infrastructure" ]
 
 env:
   DOCKER_IMAGE_NAME: simple-java-maven-app
